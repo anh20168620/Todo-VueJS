@@ -10,29 +10,17 @@
           v-autofocus
         />
         <button @click="handleClick" class="btn">Add</button>
-        <button @click="handleFilter" class="btn">Filter</button>
+        <button @click="tonggleFilter" class="btn">Filter</button>
       </div>
-      <div v-if="!isShow" class="todo-list">
-        <h3 v-for="(todo, index) in todos" :key="index" class="todo-item">
+      <div class="todo-list">
+        <h3 v-for="(todo, index) in filters" :key="index" class="todo-item">
           <input
             type="checkbox"
-            v-model="todo.done"
-            @click="todo.done = !todo.done"
+            v-model="todo.isDone"
+            @click="todo.isDone = !todo.isDone"
             class="checkbox"
           />
-          <span :class="{ active_todo: todo.done }">{{ todo.text }}</span>
-          <span class="btn-close" @click="handleDelete(index)">&times;</span>
-        </h3>
-      </div>
-      <div v-else class="todo-list">
-        <h3 v-for="(filter, index) in filters" :key="index" class="todo-item">
-          <input
-            type="checkbox"
-            v-model="filter.done"
-            @click="filter.done = !filter.done"
-            class="checkbox"
-          />
-          <span :class="{ active_todo: filter.done }">{{ filter.text }}</span>
+          <span :class="{ 'active-todo': todo.isDone }">{{ todo.text }}</span>
           <span class="btn-close" @click="handleDelete(index)">&times;</span>
         </h3>
       </div>
@@ -44,28 +32,24 @@ export default {
   data() {
     return {
       name: "",
-      isShow: false,
-      filters: [],
+      isFilter: false,
       todos: [],
     };
   },
   methods: {
     handleClick() {
-      if (this.name == "") {
+      if (this.name === "") {
         alert("Please enter a to-do");
       } else {
-        this.todos.push({ text: this.name, done: false });
+        this.todos.push({ text: this.name, isDone: false });
         this.name = "";
       }
     },
     handleDelete(index) {
       this.todos.splice(index, 1);
-      this.filters.splice(index, 1);
     },
-    handleFilter() {
-      this.filters = [];
-      this.isShow = !this.isShow;
-      this.filters.push(...this.todos.filter((todo) => todo.done == true));
+    tonggleFilter() {
+      this.isFilter = !this.isFilter;
     },
   },
   directives: {
@@ -73,6 +57,15 @@ export default {
       inserted(el) {
         el.focus();
       },
+    },
+  },
+  computed: {
+    filters() {
+      if (!this.isFilter) {
+        return this.todos;
+      } else {
+        return this.todos.filter((todo) => todo.isDone);
+      }
     },
   },
 };
@@ -117,7 +110,7 @@ export default {
   margin-top: 10px;
 }
 
-.active_todo {
+.active-todo {
   text-decoration: line-through;
 }
 
