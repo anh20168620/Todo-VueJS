@@ -1,7 +1,9 @@
-import Home from './components/Home.vue'
-import About from './components/About.vue'
-import Product from './components/Product.vue'
+import Laptop from './components/Laptop.vue'
+import Pc from './components/Pc.vue'
+import Accessory from './components/Accessory.vue'
+import Promotion from './components/Promotion.vue'
+import DetailProduct from './components/DetailProduct.vue'
 
 export default [
-    { path: '/', component: Home }, { path: '/about', component: About }, { path: '/product', component: Product }
-]
+    { path: '/laptop', component: Laptop }, { path: '/pc', component: Pc }, { path: '/linh-kien', component: Accessory }, { path: '/khuyen-mai', component: Promotion }, { path: '/', redirect: '/laptop' }, { path: '/detail-product/:id', component: DetailProduct }
+] 

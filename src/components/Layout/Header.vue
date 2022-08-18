@@ -1,18 +1,25 @@
 <template>
   <div class="header">
-    <div class="header container">
+    <div class="header-inner">
       <div class="logo">
-        <img src="../../assets/logo.svg" alt="" />
+        <img src="../../assets/image/tải xuống.png" alt="" />
       </div>
       <div class="header-list">
-        <router-link class="header-item" active-class="active" to="/" exact
-          >Home</router-link
+        <router-link
+          class="header-item"
+          active-class="active"
+          to="/laptop"
+          exact
+          >Laptop</router-link
         >
-        <router-link class="header-item" active-class="active" to="/about"
-          >About</router-link
+        <router-link class="header-item" active-class="active" to="/linh-kien"
+          >Linh kiện</router-link
         >
-        <router-link class="header-item" active-class="active" to="/product"
-          >Product</router-link
+        <router-link class="header-item" active-class="active" to="/pc"
+          >Pc</router-link
+        >
+        <router-link class="header-item" active-class="active" to="/khuyen-mai"
+          >Khuyến mại</router-link
         >
       </div>
     </div>
@@ -28,43 +35,41 @@ export default {
 };
 </script>
 <style>
-.container {
-  margin: 0 200px;
-}
 .header {
-  background-color: pink;
+  background-color: #f60;
+  position: fixed;
+  z-index: 999;
+  height: 55px;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
-.header .container {
+.header-inner {
+  max-width: 800px;
+  margin: 0 auto;
   display: flex;
-  justify-content: space-between;
-  padding: 10px;
   align-items: center;
+  height: 100%;
 }
 
 .logo img {
-  width: 80px;
-  height: 80px;
+  width: 24px;
 }
 
 .header-list {
-  display: flex;
-  justify-content: space-between;
-  width: 30%;
+  margin-left: 30px;
 }
 
 .header-item {
-  font-size: 22px;
   text-decoration: none;
-  color: #000;
-  padding: 8px 16px;
-}
-
-.header-item:hover {
   color: #fff;
+  margin-right: 20px;
+  font-size: 18px;
+  opacity: 0.7;
 }
 
 .active {
-  color: #fff;
+  opacity: 1;
 }
 </style>
